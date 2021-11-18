@@ -1,39 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Container, Typography, TextField, Button, CircularProgress, Alert } from '@mui/material';
+import { Grid } from '@mui/material';
+import login from '../../images/faq.png';
 import useAuth from '../../hooks/useAuth';
+import { NavLink, useLocation, useHistory } from 'react-router-dom';
 
 const Login = () => {
-    const { signInUsingGoogle, handleRegistration, handleNameChange, handleEmailChange, handlePasswordChange, handleResetPassword, isLogin, error, toggleLogin } = useAuth();
-    return (
-        <div>
-        <form onSubmit={handleRegistration}>
-          <h3 className="text-primary text-center mb-3">{isLogin ? 'Please Log In' : 'Please Register'}</h3>
-          {!isLogin && <div className="mb-3">
-            <label htmlFor="inputName" className="form-label">Name</label>
-            <input onBlur={handleNameChange} type="text" className="form-control" placeholder="Your Name" id="inputName" required />
-          </div>}
-          <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-            <input placeholder="Your Email" onBlur={handleEmailChange} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required />
-            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-            <input placeholder="Your Password" onBlur={handlePasswordChange} type="password" className="form-control" id="exampleInputPassword1" required />
-          </div>
-          <div className="mb-3 form-check">
-            <input onChange={toggleLogin} type="checkbox" className="form-check-input" id="exampleCheck1"/>
-            <label className="form-check-label text-primary" htmlFor="exampleCheck1">Already Registered?</label>
-          </div>
+  const [loginData, setLoginData] = useState({});
+  const { user, loginUser, isLoading, authError } = useAuth();
 
-          <div className="mb-3 text-danger">{error}</div>
-          <button type="submit" className="btn btn-primary">{isLogin ? 'Log In' : 'Register'}</button>
-          <br /> <br />
-          <button onClick={handleResetPassword} type="button" className="btn btn-secondary mt-2">Reset Password</button>
-        </form>
-        <br /> <br />
-        <button onClick={signInUsingGoogle} className="btn btn-warning mb-3">Google Sign In</button>
-        </div>
-    );
+  const location = useLocation();
+  const history = useHistory();
+
+  const handleOnChange = e => {
+      const field = e.target.name;
+      const value = e.target.value;
+      const newLoginData = { ...loginData };
+      newLoginData[field] = value;
+      setLoginData(newLoginData);
+  }
+  const handleLoginSubmit = e => {
+      loginUser(loginData.email, loginData.password, location, history);
+      e.preventDefault();
+  }
+
+    return (
+      <Container>
+          <Grid container spacing={2}>
+              <Grid item sx={{ mt: 8 }} xs={12} md={6}>
+                  <Typography variant="body1" gutterBottom>Login</Typography>
+                  <form onSubmit={handleLoginSubmit}>
+                      <TextField
+                          sx={{ width: '75%', m: 1 }}
+                          id="standard-basic"
+                          label="Your Email"
+                          name="email"
+                          onChange={handleOnChange}
+                          variant="standard" />
+                      <TextField
+                          sx={{ width: '75%', m: 1 }}
+                          id="standard-basic"
+                          label="Your Password"
+                          type="password"
+                          name="password"
+                          onChange={handleOnChange}
+                          variant="standard" />
+
+                      <Button sx={{ width: '75%', m: 1 }} type="submit" variant="contained">Login</Button>
+                      <NavLink
+                          style={{ textDecoration: 'none' }}
+                          to="/register">
+                          <Button variant="text">New User? Please Register</Button>
+                      </NavLink>
+                      {isLoading && <CircularProgress />}
+                      {user?.email && <Alert severity="success">Login successfully!</Alert>}
+                      {authError && <Alert severity="error">{authError}</Alert>}
+                  </form>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                  <img style={{ width: '100%' }} src={login} alt="" />
+              </Grid>
+          </Grid>
+      </Container>
+  );
 };
 
 export default Login;

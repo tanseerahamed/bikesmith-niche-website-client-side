@@ -14,6 +14,7 @@ import Purchase from './Pages/Services/Purchase/Purchase';
 import ManageServices from './Pages/Services/ManageServices/ManageServices';
 import PurchaseConfirmed from './Pages/Services/PurchaseConfirmed/PurchaseConfirmed';
 import Orders from './Pages/Services/Orders/Orders';
+import Register from './Pages/Register/Register';
 
 function App() {
   return (
@@ -48,6 +49,9 @@ function App() {
           </Route>
           <Route path='/login'>
             <Login></Login>
+          </Route>
+          <Route path='/register'>
+            <Register></Register>
           </Route>
           <Route path="*">
               <NotFound></NotFound>
