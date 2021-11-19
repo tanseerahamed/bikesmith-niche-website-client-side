@@ -11,7 +11,7 @@ const Purchase = () => {
         fetch(`http://localhost:5000/cycles/${_id}`)
         .then(res => res.json())
         .then(data => setService(data));
-    } , [])
+    })
 
     return (
         <div>
@@ -19,7 +19,7 @@ const Purchase = () => {
             <img className="w-50" src={service.img} alt="" />
             <p>{service.description}</p>
             <h3>Price: {service.price}</h3>
-            <button className="btn btn-info m-3 p-2"><Link className="text-decoration-none fw-bolder text-dark" to='/purchaseConfirmed'>Book Now: {service.name}</Link></button>
+            <button className="btn btn-info m-3 p-2"><Link to='/purchaseConfirmed' className="text-decoration-none fw-bolder text-dark">Buy Now: {service.name}</Link></button>
         </div>
     );
 };

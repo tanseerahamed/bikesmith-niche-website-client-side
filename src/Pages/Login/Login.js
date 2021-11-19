@@ -2,27 +2,32 @@ import React, { useState } from 'react';
 import { Container, Typography, TextField, Button, CircularProgress, Alert } from '@mui/material';
 import { Grid } from '@mui/material';
 import login from '../../images/faq.png';
-import useAuth from '../../hooks/useAuth';
+
 import { NavLink, useLocation, useHistory } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
   const [loginData, setLoginData] = useState({});
-  const { user, loginUser, isLoading, authError } = useAuth();
+  const { user, loginUser, isLoading, authError, signInWithGoogle } = useAuth();
 
   const location = useLocation();
   const history = useHistory();
 
-  const handleOnChange = e => {
+      const handleOnChange = e => {
       const field = e.target.name;
       const value = e.target.value;
       const newLoginData = { ...loginData };
       newLoginData[field] = value;
       setLoginData(newLoginData);
-  }
+    }
   const handleLoginSubmit = e => {
       loginUser(loginData.email, loginData.password, location, history);
       e.preventDefault();
-  }
+    }
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle(location, history)
+    }
 
     return (
       <Container>
@@ -56,6 +61,8 @@ const Login = () => {
                       {user?.email && <Alert severity="success">Login successfully!</Alert>}
                       {authError && <Alert severity="error">{authError}</Alert>}
                   </form>
+                  <p>------------------------</p>
+                  <Button onClick={handleGoogleSignIn} variant="contained">Google Sign In</Button>
               </Grid>
               <Grid item xs={12} md={6}>
                   <img style={{ width: '100%' }} src={login} alt="" />

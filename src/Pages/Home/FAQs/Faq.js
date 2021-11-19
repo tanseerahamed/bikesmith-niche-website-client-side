@@ -5,12 +5,12 @@ import faq from '../../../images/faq.png';
 const Faq = () => {
     return (
     <div>
-        <h1 class="text-center text-success fw-bold m-3">FREQUENTLY ASKED QUESTIONS (FAQs)</h1>
+        <h1 className="text-center text-success fw-bold my-3">FREQUENTLY ASKED QUESTIONS (FAQs)</h1>
         <CardGroup>
-        <Card.Text className="col-lg-6 col-md-12 my-3">
+        <Card.Text className="col-lg-6 col-md-12">
             <Card.Img className="w-75 fluid" variant="top" src={faq} />
         </Card.Text>
-        <Card.Text className="col-lg-6 col-md-12 g-2">
+        <Card.Text className="col-lg-6 col-md-12">
         <Accordion>
         <Accordion.Item eventKey="0">
             <Accordion.Header> What are the most important things I should know about riding a cycle?</Accordion.Header>

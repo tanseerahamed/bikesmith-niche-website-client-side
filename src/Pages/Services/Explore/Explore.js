@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Service from '../Service/Service';
-import './Services.css';
+import '../Services/Services.css';
 
-const Services = () => {
+const Explore = () => {
     const [services, setServices] = useState([])
     useEffect(() => {
         fetch('http://localhost:5000/cycles')
@@ -15,8 +15,8 @@ const Services = () => {
             <h2 className="text-success fw-bold fs-1">OUR EXCLUSIVE COLLECTIONS</h2>
             <div className="service-container">
                 {
-                    services.slice(0,6).map(service => <Service
-                        key={service._id}
+                    services.map(service => <Service
+                        key={service.id}
                         service={service}
                     ></Service>)
                 }
@@ -24,4 +24,4 @@ const Services = () => {
         </div>
     );
 };
-export default Services;
+export default Explore;

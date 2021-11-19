@@ -7,7 +7,7 @@ const Review = () => {
     return (
         
         <div>
-            <h1 className="text-center text-success fw-bold m-3">HAPPY CLIENTS SAY</h1>
+            <h1 className="text-center text-success fw-bold my-3">HAPPY CLIENTS SAY</h1>
             <CardGroup>
             <Card style={{ width: '18rem' }}>
                 <Card.Img className="w-50 fluid d-block mx-auto my-auto" variant="top" src={user1} />

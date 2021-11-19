@@ -5,16 +5,16 @@ import AuthProvider from './Context/AuthProvider';
 import Home from './Pages/Home/Home/Home';
 import Login from './Pages/Login/Login';
 import NotFound from './Pages/Shared/NotFound/NotFound';
-import AddService from './Pages/Services/AddService/AddService';
 import Header from './Pages/Shared/Header/Header';
 import Footer from './Pages/Shared/Footer/Footer';
-import Services from './Pages/Services/Services/Services';
 import PrivateRoute from './Pages/PrivateRoute/PrivateRoute';
 import Purchase from './Pages/Services/Purchase/Purchase';
-import ManageServices from './Pages/Services/ManageServices/ManageServices';
 import PurchaseConfirmed from './Pages/Services/PurchaseConfirmed/PurchaseConfirmed';
-import Orders from './Pages/Services/Orders/Orders';
 import Register from './Pages/Register/Register';
+import Explore from './Pages/Services/Explore/Explore';
+import Dashboard from './Pages/Dashboard/Dashboard/Dashboard.js';
+
+
 
 function App() {
   return (
@@ -23,30 +23,27 @@ function App() {
       <Router>
         <Header></Header>
         <Switch>
+          <PrivateRoute path="/dashboard">
+            <Dashboard></Dashboard>
+          </PrivateRoute>
+
+
           <Route exact path="/">
               <Home></Home>
           </Route>
           <Route path='/home'>
             <Home></Home>
           </Route>
-          <Route path='/services'>
-            <Services></Services>
+          <Route path='/explore'>
+            <Explore></Explore>
           </Route>
-          <Route path='/addService'>
-            <AddService></AddService>
-          </Route>
-          <Route path='/manageServices'>
-            <ManageServices></ManageServices>
-         </Route>
           <PrivateRoute path="/purchase/:_id">
               <Purchase></Purchase>
           </PrivateRoute>
-          <PrivateRoute path="/orders">
-            <Orders></Orders>
-          </PrivateRoute>
-          <Route path="/purchaseConfirmed">
+ 
+         <PrivateRoute path="/purchaseConfirmed">
           <PurchaseConfirmed></PurchaseConfirmed>
-          </Route>
+          </PrivateRoute>
           <Route path='/login'>
             <Login></Login>
           </Route>
