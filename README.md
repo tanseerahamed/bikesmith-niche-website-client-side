@@ -1,6 +1,6 @@
 BIKESMITH WEBSITE for BUYING CYCLE at Ease!!
 
-CODE LINK: https://github.com/programming-hero-web-course-4/niche-website-client-side-tanseerahamed
+CODE LINK: https://github.com/tanseerahamed/bikesmith-niche-website-client-side
 
 
 •	Home page  have a header (simple navbar), banner, products, reviews, and footer. On the home page, the products  have a maximum of 6 items/products. You can put one or more products in a row based on your design. Each product should have a relevant name, image, short description, add a purchase or buy now button. If a user clicks on the purchase or buy now button it will take the user to the purchase page.
